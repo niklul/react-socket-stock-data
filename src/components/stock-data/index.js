@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from './stock-data.css';
 import { withStyles } from '@material-ui/core/styles';
 import WebsocketService from '../../_lib/reconnecting-socket';
 
@@ -10,6 +9,15 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import StockRow from './elements/stock-row';
+
+
+const styles={
+    container:{
+        maxWidth: '500px',
+        margin: 'auto'
+    }
+}
 
 class StockTable extends Component {
 
@@ -57,13 +65,38 @@ class StockTable extends Component {
         this.setState({stock_data})
     }
 
+    getTableRows = ()=>{
+        const {stock_data} = this.state;
+        const table = []
+        for (let key in stock_data){
+            let item = stock_data[key]
+
+            table.push(
+                <StockRow key={key} name={key} {...item} />
+            )
+        }
+
+        return table
+
+    }
+
     render() {
         const {classes} = this.props;
-        const {stock_data} = this.state
         return (
-            <div>
-                hello
-            </div>
+            <Paper className={classes.container}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Company</TableCell>
+                            <TableCell align="left">Stock Value</TableCell>
+                            <TableCell align="right">Last updated</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {this.getTableRows()}
+                    </TableBody>
+                </Table>
+            </Paper>
         );
     }
 }
