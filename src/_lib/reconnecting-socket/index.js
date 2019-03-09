@@ -13,6 +13,9 @@ class WebsocketService {
         if (this.socket){
             this.socket.close()
         }
+        if(this.observer){
+            this.observer.complete('Connection Closed')
+        }
         this.socket = undefined;
         this.observer = undefined;
         return true;
@@ -36,7 +39,7 @@ class WebsocketService {
     }
 
     handleOpen = (e)=>{
-        this.observer.next(e)
+        // this.observer.next(e)
     }
 
     handleMessage = (e)=>{
