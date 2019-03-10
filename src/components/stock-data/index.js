@@ -28,7 +28,7 @@ class StockTable extends Component {
 
     constructor(props){
         super(props)
-        this.socket_service = new WebsocketService('ws://stocks.mnet.website')
+        this.socket_service = new WebsocketService(`${ window.location.protocol === 'https:'? 'wss' : 'ws' }://stocks.mnet.website`)
     }
 
     componentDidMount(){
