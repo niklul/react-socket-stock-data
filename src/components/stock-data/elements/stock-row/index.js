@@ -16,8 +16,8 @@ const styles = {
 class StockRow extends Component{
 
     getReadableTime = (date)=>{
-        // TODO: handle minutes when 18:02 -> 18:2
-        return date.getHours() + ':'+ date.getMinutes()
+        // return date.getHours() + ':'+ date.getMinutes()
+        return date.toTimeString().substr(0,5)
     }
 
     render(){
@@ -26,7 +26,7 @@ class StockRow extends Component{
             <React.Fragment>
                 <TableRow >
                     <TableCell >{name}</TableCell>
-                    <TableCell align="left" className={`${value>  previous_value && classes.up} ${value < previous_value && classes.down}`}>
+                    <TableCell align="left" className={`${value >  previous_value && classes.up} ${value < previous_value && classes.down}`}>
                         {value}
                     </TableCell>
                     <TableCell align="right">{this.getReadableTime(updated_at)}</TableCell>

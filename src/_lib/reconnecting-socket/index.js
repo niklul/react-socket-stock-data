@@ -26,6 +26,7 @@ class WebsocketService {
         this.socket.onopen = this.handleOpen
         this.socket.onmessage = this.handleMessage
         this.socket.onclose = this.handleClose
+        this.socket.onEmptied = this.handleError
     }
 
     connect = ()=>{
@@ -48,6 +49,10 @@ class WebsocketService {
     handleClose = (e)=>{
         this.observer.complete(e)
         this.resetSocket()
+    }
+
+    handleError = (e)=>{
+        this.observer.error(e)
     }
 
     send = (data)=>{

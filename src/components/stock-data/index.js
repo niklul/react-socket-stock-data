@@ -38,8 +38,7 @@ class StockTable extends Component {
                 this.handleIncoming(JSON.parse(data.data))
             },
             (err)=>{
-                // TODO: need efficiency
-                alert(err)
+                console.log(err)
             }
         )
     }
